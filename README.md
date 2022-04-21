@@ -3,7 +3,7 @@ A Chess AI bot for AI Introduction Project
 
 # Usage
 ## Analysis
-First you should create a python virtual enviroment and activate it.
+First you should create a python virtual enviroment and activate it. If this package is not installed, please download Python and [this package](https://pypi.org/project/virtualenv/)
 ```
 virtualenv .venv
 source .venv/bin/activate
