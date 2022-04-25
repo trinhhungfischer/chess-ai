@@ -1,12 +1,12 @@
 import chess
-import sunfish
+# import sunfish
 import math
 import random
 import sys
+from Evaluation import evaluation, getPieceValue
 
 
-
-def minimaxRoot(depth, board,isMaximizing):
+def minimaxRoot(depth, board, isMaximizing):
     possibleMoves = board.legal_moves
     bestMove = -9999
     secondBest = -9999
@@ -47,60 +47,6 @@ def minimax(depth, board, is_maximizing):
             bestMove = min(bestMove, minimax(depth - 1, board, not is_maximizing))
             board.pop()
         return bestMove
-
-
-#def calculateMove(board):
-#    possible_moves = board.legal_moves
-#    if(len(possible_moves) == 0):
-#        print("No more possible moves...Game Over")
-#        sys.exit()
-#    bestMove = None
-#    bestValue = -9999
-#    n = 0
-#    for x in possible_moves:
-#        move = chess.Move.from_uci(str(x))
-#        board.push(move)
-#        boardValue = -evaluation(board)
-#        board.pop()
-#        if(boardValue > bestValue):
-#            bestValue = boardValue
-#            bestMove = move
-#
-#    return bestMove
-
-def evaluation(board):
-    i = 0
-    evaluation = 0
-    x = True
-    try:
-        x = bool(board.piece_at(i).color)
-    except AttributeError as e:
-        x = x
-    while i < 63:
-        i += 1
-        evaluation = evaluation + (getPieceValue(str(board.piece_at(i))) if x else -getPieceValue(str(board.piece_at(i))))
-    return evaluation
-
-
-def getPieceValue(piece):
-    if(piece == None):
-        return 0
-    value = 0
-    if piece == "P" or piece == "p":
-        value = 10
-    if piece == "N" or piece == "n":
-        value = 30
-    if piece == "B" or piece == "b":
-        value = 30
-    if piece == "R" or piece == "r":
-        value = 50
-    if piece == "Q" or piece == "q":
-        value = 90
-    if piece == 'K' or piece == 'k':
-        value = 900
-    #value = value if (board.piece_at(place)).color else -value
-    return value
-
 def main():
     board = chess.Board()
     n = 0
@@ -117,9 +63,6 @@ def main():
             board.push(move)
         print(board)
         n += 1
-
-
-
 
 
 if __name__ == "__main__":
