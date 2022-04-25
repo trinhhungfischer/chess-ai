@@ -22,7 +22,7 @@ def minimaxRoot(depth, board,isMaximizing):
 		board.pop()
 		moveValueList.append(value)
 
-		if( value > bestMove):
+		if(value > bestMove):
 			bestMove = value
 			bestMoveFinal = move
 
