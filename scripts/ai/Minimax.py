@@ -1,13 +1,13 @@
 import chess
 # import sunfish
-import math
-import random
-import sys
-from Evaluation import evaluation, getPieceValue
+from Evaluation import evaluation
 
 
 def minimaxRoot(depth, board, isMaximizing):
+    # 
     possibleMoves = board.legal_moves
+    
+
     bestMove = -9999
     secondBest = -9999
     thirdBest = -9999

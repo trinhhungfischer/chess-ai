@@ -12,6 +12,6 @@ source .venv/bin/activate
 ```
 After enviroment activation, you must install requirement by this command
 ```
-pip install -r requirement.txt
+.venv/bin/pip install -r requirement.txt
 ```
 Now you can run the scripts in the analysis folder
