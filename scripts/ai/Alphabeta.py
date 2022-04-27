@@ -68,7 +68,7 @@ def calculateMove(board):
     return bestMove
 
 def main():
-    board = chess.Board("2r1nr1k/pp1q1p1p/3bpp2/5P2/1P1Q4/P3P3/1B3P1P/R3K1R1 w Q - 0 1")
+    board = chess.Board("8/8/8/8/8/1K6/3Q4/k7 w - - 0 1")
     n = 0
     print(board)
     while n < 100:
@@ -76,6 +76,13 @@ def main():
             move = input("Enter move: ")
             move = chess.Move.from_uci(str(move))
             board.push(move)
+            if (len(list(board.legal_moves)) == 0):
+              if (board.is_checkmate() == True):
+                print("You win!!")
+              else:
+                print("Stale Mate")
+              break
+
         else:
             print("Computers Turn:")
             move = minimaxRoot(3,board,True)
