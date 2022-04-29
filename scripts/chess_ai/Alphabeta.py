@@ -1,7 +1,7 @@
 import chess
 # import sunfish
 import sys
-from Evaluation import evaluation
+from chess_ai.Evaluation import evaluation
 
 
 def minimaxRoot(depth, board,isMaximizing):
