@@ -1,10 +1,14 @@
 import chess
-# import sunfish
+
 from chess_ai.Evaluation import evaluation
 
 
-def minimaxRoot(depth, board, isMaximizing):
-    # 
+class Minimax:
+
+  def __init__(self) -> None:
+      pass  
+
+  def minimaxRoot(self, depth, board, isMaximizing):
     possibleMoves = board.legal_moves
     
 
@@ -15,7 +19,7 @@ def minimaxRoot(depth, board, isMaximizing):
     for x in possibleMoves:
         move = chess.Move.from_uci(str(x))
         board.push(move)
-        value = max(bestMove, minimax(depth - 1, board, not isMaximizing))
+        value = max(bestMove, self.minimax(depth - 1, board, not isMaximizing))
         board.pop()
         if( value > bestMove):
             print("Best score: " ,str(bestMove))
@@ -27,7 +31,7 @@ def minimaxRoot(depth, board, isMaximizing):
             bestMoveFinal = move
     return bestMoveFinal
 
-def minimax(depth, board, is_maximizing):
+  def minimax(self, depth, board, is_maximizing):
     if(depth == 0):
         return -evaluation(board)
     possibleMoves = board.legal_moves
@@ -36,7 +40,7 @@ def minimax(depth, board, is_maximizing):
         for x in possibleMoves:
             move = chess.Move.from_uci(str(x))
             board.push(move)
-            bestMove = max(bestMove,minimax(depth - 1, board, not is_maximizing))
+            bestMove = max(bestMove, self.minimax(depth - 1, board, not is_maximizing))
             board.pop()
         return bestMove
     else:
@@ -44,26 +48,6 @@ def minimax(depth, board, is_maximizing):
         for x in possibleMoves:
             move = chess.Move.from_uci(str(x))
             board.push(move)
-            bestMove = min(bestMove, minimax(depth - 1, board, not is_maximizing))
+            bestMove = min(bestMove, self.minimax(depth - 1, board, not is_maximizing))
             board.pop()
         return bestMove
-def main():
-    board = chess.Board()
-    n = 0
-    print(board)
-    while n < 100:
-        if n%2 == 0:
-            move = input("Enter move: ")
-            move = chess.Move.from_uci(str(move))
-            board.push(move)
-        else:
-            print("Computers Turn:")
-            move = minimaxRoot(4,board,True)
-            move = chess.Move.from_uci(str(move))
-            board.push(move)
-        print(board)
-        n += 1
-
-
-if __name__ == "__main__":
-    main()
