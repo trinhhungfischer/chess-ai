@@ -1,7 +1,7 @@
 import chess
 from chess_ai.ChessAI import ai_mapping
 
-ai_module = "Alphabeta"
+ai_module = "Minimax"
 
 def print_board(board: chess.Board, isWhite : bool):
   if isWhite:
@@ -35,7 +35,7 @@ def game():
 
     else:
       print("Computers Turn:")
-      move = ai_mapping[ai_module](3,board,True)
+      move = ai_mapping[ai_module](3, board, True)
       move = chess.Move.from_uci(str(move))
       board.push(move)
     print_board(board = board, isWhite = isWhite)
