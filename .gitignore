@@ -1,6 +1,3 @@
-.venv/
-.vscode/
-data/
-raw_game/
-**/ipynb_checkpoints/
-**/__pycache__/
+__pycache__/
+*.pyc
+saved_games/
