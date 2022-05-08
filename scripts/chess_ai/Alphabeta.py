@@ -11,6 +11,7 @@ class Alphabeta:
 
   def minimaxRoot(self, depth, board, isMaximizing):
     possibleMoves = board.legal_moves
+    print(list(possibleMoves))
     bestMove = -9999
     bestMoveFinal = None
     for x in possibleMoves:
@@ -18,7 +19,7 @@ class Alphabeta:
       board.push(move)
 
       value = max(
-        bestMove, self.minimax(
+        bestMove, self.alphabeta(
           depth - 1, board, -10000, 10000, not isMaximizing))
       board.pop()
       if(value > bestMove):
@@ -28,10 +29,12 @@ class Alphabeta:
         bestMoveFinal = move
     return bestMoveFinal
 
-  def minimax(self, depth, board, alpha, beta, is_maximizing):
+  def alphabeta(self, depth, board, alpha, beta, is_maximizing):
     if(depth == 0):
       return -evaluation(board)
     possibleMoves = board.legal_moves
+    
+    # Fail-soft alpha-beta pruning
     if(is_maximizing):
       bestMove = -9999
       for x in possibleMoves:
@@ -39,7 +42,7 @@ class Alphabeta:
         board.push(move)
         bestMove = max(
           bestMove,
-          self.minimax(depth - 1, board, alpha,
+          self.alphabeta(depth - 1, board, alpha,
             beta, not is_maximizing))
         board.pop()
         alpha = max(alpha, bestMove)
@@ -53,7 +56,7 @@ class Alphabeta:
         board.push(move)
         bestMove = min(
           bestMove,
-          self.minimax(depth - 1, board, alpha,
+          self.alphabeta(depth - 1, board, alpha,
             beta, not is_maximizing))
         board.pop()
         beta = min(beta, bestMove)

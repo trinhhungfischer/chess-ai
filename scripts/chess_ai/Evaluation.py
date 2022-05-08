@@ -1,3 +1,6 @@
+import chess
+
+
 def getPieceValue(piece):
   if(piece is None):
     return 0
@@ -11,10 +14,23 @@ def getPieceValue(piece):
   return value
 
 
-def evaluation(board):
+def evaluation(board: chess.Board):
   i = 0
   evaluation = 0
   x = True
+  
+  if board.is_checkmate():
+    if board.turn:
+      return -9999
+    else:
+      return 9999
+  
+  if board.is_stalemate():
+    return 0
+  if board.is_insufficient_material():
+    return 0
+  
+  
   while i <= 63:
     try:
       x = bool(board.piece_at(i).color)
@@ -24,5 +40,5 @@ def evaluation(board):
     evaluation = evaluation + (getPieceValue(str(board.piece_at(i)))
                                if x else -getPieceValue(str(board.piece_at(i))))
     i += 1
-  
+
   return evaluation

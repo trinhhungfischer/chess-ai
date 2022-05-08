@@ -1,7 +1,7 @@
 import chess
 from chess_ai.ChessAI import ai_mapping
 
-ai_module = "Minimax"
+ai_module = "Alphabeta"
 
 def print_board(board: chess.Board, isWhite : bool):
   if isWhite:
@@ -22,16 +22,15 @@ def game():
 
   while n < 100:
     if n%2 != isWhite:
-      print(board.legal_moves)
       move = input("Enter move: ")
       move = chess.Move.from_uci(str(move))
       board.push(move)
-      if (len(list(board.legal_moves)) == 0):
-        if (board.is_checkmate() == True):
-          print("You win!!")
-        else:
-          print("Stale Mate")
-        break
+      # if (len(list(board.legal_moves)) == 0):
+      #   if (board.is_checkmate() == True):
+      #     print("You win!!")
+      #   else:
+      #     print("Stale Mate")
+      #   break
 
     else:
       print("Computers Turn:")
