@@ -1,3 +1,5 @@
 __pycache__/
 *.pyc
 saved_games/
+data/
+raw_game/

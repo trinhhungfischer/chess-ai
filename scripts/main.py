@@ -1,7 +1,5 @@
-
-
-from board import ChessBoard, BoardControls
-from player import Player, AiPlayer, PlayerOptions
+from gui.board import ChessBoard, BoardControls
+from gui.player import Player, AiPlayer, PlayerOptions
 from PyQt5.QtCore import pyqtSignal, pyqtSlot
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QMessageBox
 import os
@@ -28,9 +26,9 @@ class Window(QWidget):
          self.player_b = AiPlayer(exe_path, turn_limit_s, Player.BLACK, thread, self.board)
          self.player_w = AiPlayer(exe_path, turn_limit_s, Player.WHITE, thread, self.board)
       else:
-         self.player_b = Player(Player.BLACK, thread, self.board)
-         self.player_w = Player(Player.WHITE, thread, self.board)
-         
+          self.player_b = Player(Player.BLACK, thread, self.board)
+          self.player_w = Player(Player.WHITE, thread, self.board)
+      
       player_options_b = PlayerOptions(self.player_b, self)
       board_controls = BoardControls(self.board)
       player_options_w = PlayerOptions(self.player_w, self)
