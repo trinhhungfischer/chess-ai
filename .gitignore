@@ -4,3 +4,4 @@ data/
 raw_game/
 **/ipynb_checkpoints/
 **/__pycache__/
+test/**
