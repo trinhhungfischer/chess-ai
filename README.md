@@ -22,3 +22,14 @@ The AI module is written in [./script/chess_ai](./scripts/chess_ai/) with the al
 Now, there are 2 algorithms in this moudule:
 1. Minimax 
 2. Minimax with Alpha Beta Pruning
+3. Negamax
+4. Negamax with ALpha Beta Pruning
+
+You can run a game with bot with run [main.py](./main.py) python file or run it in terminal by command in window
+```
+python main.py
+```
+or in linux 
+```
+python3 main.py
+```

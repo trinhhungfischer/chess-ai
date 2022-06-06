@@ -4,7 +4,8 @@ import chess
 
 from scripts.chess_ai.Evaluation import evaluation
 
-class Alphabeta:
+class NegamaxAB:
+
   def __init__(self) -> None:
     pass
 
