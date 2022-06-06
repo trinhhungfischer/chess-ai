@@ -1,7 +1,7 @@
 import chess
-from chess_ai.ChessAI import ai_mapping
+from scripts.chess_ai.ChessAI import ai_mapping
 
-ai_module = "Alphabeta"
+ai_module = "NegamaxAB"
 
 def print_board(board: chess.Board, isWhite : bool):
   if isWhite:
@@ -22,9 +22,11 @@ def game():
 
   while n < 100:
     if n%2 != isWhite:
+      print('Board turn is ', board.turn)
       move = input("Enter move: ")
       move = chess.Move.from_uci(str(move))
       board.push(move)
+
       # if (len(list(board.legal_moves)) == 0):
       #   if (board.is_checkmate() == True):
       #     print("You win!!")
@@ -33,12 +35,12 @@ def game():
       #   break
 
     else:
+      print('Board turn is ', board.turn)
       print("Computers Turn:")
-      move = ai_mapping[ai_module](3, board, True)
+      move = ai_mapping[ai_module](5, board, True)
+      print('Last move :', move)
       move = chess.Move.from_uci(str(move))
       board.push(move)
+
     print_board(board = board, isWhite = isWhite)
     n += 1
-
-if __name__ == "__main__":
-  game()

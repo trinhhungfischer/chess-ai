@@ -21,9 +21,9 @@ def evaluation(board: chess.Board):
   
   if board.is_checkmate():
     if board.turn:
-      return -9999
-    else:
       return 9999
+    else:
+      return -9999
   
   if board.is_stalemate():
     return 0

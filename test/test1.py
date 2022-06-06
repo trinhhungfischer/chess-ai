@@ -11,6 +11,7 @@ board.push_uci('d7d5')
 board.push_uci('e4d5')
 
 print(board.pieces(chess.PAWN, chess.BLACK))
+board.pop()
 print(len(board.pieces(chess.PAWN, chess.BLACK)))
 
 

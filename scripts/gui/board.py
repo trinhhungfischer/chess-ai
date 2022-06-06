@@ -54,12 +54,14 @@ class ChessBoard(QWidget, chess.Board):
       if self.LeftClickedBoard(event):
          this_click = self.GetClicked(event)
          
+         
          if self.last_click:
             if self.last_click != this_click:
                uci = self.last_click + this_click
                self.ApplyMove(uci + self.GetPromotion(uci))
                
          self.last_click = this_click
+         
          
    def GetPromotion(self, uci):
       """
@@ -76,12 +78,13 @@ class ChessBoard(QWidget, chess.Board):
       """
          BRIEF  Apply a move to the board
       """
+      print(uci)
       move = chess.Move.from_uci(uci)
       if move in self.legal_moves:
          self.push(move)
          self.DrawBoard()
          
-         print(self.fen())
+        #  print(self.fen())
          if not self.is_game_over():
             self.ReadyForNextMove.emit(self.fen())
          else:
