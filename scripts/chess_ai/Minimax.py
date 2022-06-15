@@ -11,14 +11,18 @@ class Minimax:
     
   def minimaxRoot(self, depth, board: chess.Board, isMaximizing):
     possibleMoves = board.legal_moves
-
-    bestMoveValue = -9999
+    
+    bestMoveValue = -99999
 
     bestMoveFinal = None
 
-    if (len(possibleMoves) == 0):
-      print('DM HET NUOC ROI')
+    if (len(list(possibleMoves)) == 0):
+      if (board.is_checkmate()):
+        print("You win")
+      elif (board.is_stalemate()):
+        print("Draw")
       return
+
 
     for x in possibleMoves:
       move = chess.Move.from_uci(str(x))
@@ -29,6 +33,7 @@ class Minimax:
       if(value > bestMoveValue):
         bestMoveValue = value
         bestMoveFinal = move
+        print(value)
 
     return bestMoveFinal
 
@@ -37,7 +42,7 @@ class Minimax:
       return -evaluation(board, is_maximizing)
     possibleMoves = board.legal_moves
     if(is_maximizing):
-      bestMove = -9999
+      bestMove = -99999
       for x in possibleMoves:
         move = chess.Move.from_uci(str(x))
         board.push(move)
@@ -45,7 +50,7 @@ class Minimax:
         board.pop()
       return bestMove
     else:
-      bestMove = 9999
+      bestMove = 99999
       for x in possibleMoves:
         move = chess.Move.from_uci(str(x))
         board.push(move)

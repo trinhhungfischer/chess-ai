@@ -129,12 +129,8 @@ def evaluation(board: chess.Board, isMaximizing):
   x = True
 
   if board.is_checkmate():
-    return 9999 * (1 if isMaximizing else -1)
+    return 99999 * (1 if isMaximizing else -1)
 
-  #   if board.turn:
-  #     return 9999
-  #   else:
-  #     return -9999
 
   if board.is_stalemate():
     return 0
@@ -147,10 +143,11 @@ def evaluation(board: chess.Board, isMaximizing):
       x = bool(board.piece_at(i).color)
 
       evaluation = evaluation + (getPieceValue(str(board.piece_at(i)), i)
-                                 if x else -getPieceValue(str(board.piece_at(i)), i))
-      i += 1
-
+                                 if x else -getPieceValue(str(board.piece_at(i)), i))      
     except AttributeError as e:
       pass
+    
+    i += 1
+
 
   return evaluation

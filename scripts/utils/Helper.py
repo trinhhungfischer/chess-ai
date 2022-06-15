@@ -10,7 +10,7 @@ class Helper:
   '''
   def getBoardStateScore(board: chess.Board):
     if board.is_checkmate():
-      return 9999
+      return 99999
 
     if board.is_stalemate():
       return 0
