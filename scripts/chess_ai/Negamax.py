@@ -31,7 +31,7 @@ class Negamax:
 
   def minimax(self, depth, board, is_maximizing):
     if(depth == 0):
-      return -evaluation(board)
+      return -evaluation(board, is_maximizing)
 
     possibleMoves = board.legal_moves
 

@@ -26,14 +26,6 @@ def game():
       move = input("Enter move: ")
       move = chess.Move.from_uci(str(move))
       board.push(move)
-
-      # if (len(list(board.legal_moves)) == 0):
-      #   if (board.is_checkmate() == True):
-      #     print("You win!!")
-      #   else:
-      #     print("Stale Mate")
-      #   break
-
     else:
       print('Board turn is ', board.turn)
       print("Computers Turn:")

@@ -31,7 +31,7 @@ class NegamaxAB:
 
   def alphabeta(self, depth, board, alpha, beta, is_maximizing):
     if(depth == 0):
-      return -evaluation(board)
+      return -evaluation(board, is_maximizing)
     possibleMoves = board.legal_moves
     
     # Fail-soft alpha-beta pruning
