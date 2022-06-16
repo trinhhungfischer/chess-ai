@@ -4,7 +4,8 @@ import chess
 
 from scripts.chess_ai.Evaluation import evaluation
 
-class Alphabeta:
+class NegamaxAB:
+
   def __init__(self) -> None:
     pass
 
@@ -30,7 +31,7 @@ class Alphabeta:
 
   def alphabeta(self, depth, board, alpha, beta, is_maximizing):
     if(depth == 0):
-      return -evaluation(board)
+      return -evaluation(board, is_maximizing)
     possibleMoves = board.legal_moves
     
     # Fail-soft alpha-beta pruning

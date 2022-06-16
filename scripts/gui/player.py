@@ -143,97 +143,98 @@ class PlayerOptions(QWidget):
          turn_limit_s.setEnabled(False)
          
          
-if __name__ == "__main__":
-   """
-      BRIEF  Test the Player class
-   """
-   import chess
-   import sys
+# if __name__ == "__main__":
+#    """
+#       BRIEF  Test the Player class
+#    """
+#    import chess
+#    import sys
    
-   exe_path = '../chess-ai/build/chess-ai.exe'
+#    exe_path = '../chess-ai/build/chess-ai.exe'
    
-   #----------------------
-   # Synchronous
-   #----------------------
-   board = chess.Board()
-   player_b = AiPlayer(exe_path, .1, Player.BLACK)
-   player_w = AiPlayer(exe_path, .1, Player.WHITE)
-   player = player_w
+#    #----------------------
+#    # Synchronous
+#    #----------------------
+#    board = chess.Board()
+#    player_b = AiPlayer(exe_path, .1, Player.BLACK)
+#    player_w = AiPlayer(exe_path, .1, Player.WHITE)
+#    player = player_w
    
-   while not board.is_game_over():
-      uci = player.TakeTurn(board.fen())
+#    while not board.is_game_over():
+#       uci = player.TakeTurn(board.fen())
       
-      print(uci)
-      sys.stdout.flush()
+#       print(uci)
+#       sys.stdout.flush()
       
-      board.push(chess.Move.from_uci(uci))
+#       board.push(chess.Move.from_uci(uci))
       
-      if player == player_w:
-         player = player_b
-      else:
-         player = player_w
+#       if player == player_w:
+#          player = player_b
+#       else:
+#          player = player_w
          
-   print(board.fen())
-   sys.stdout.flush()
+#    print(board.fen())
+#    sys.stdout.flush()
    
-   #----------------------
-   # Asynchronous
-   #----------------------
-   from PyQt5.QtCore import QThread
-   from PyQt5.QtWidgets import QApplication
+#    #----------------------
+#    # Asynchronous
+#    #----------------------
+#    from PyQt5.QtCore import QThread
+#    from PyQt5.QtWidgets import QApplication
    
-   class ChessBoard(QObject, chess.Board):
-      """
-         BRIEF  A helper class for the signal/slot testing
-      """
-      ReadyForNextMove = pyqtSignal(str)
-      GameOver = pyqtSignal()
+#    class ChessBoard(QObject, chess.Board):
+#       """
+#          BRIEF  A helper class for the signal/slot testing
+#       """
+#       ReadyForNextMove = pyqtSignal(str)
+#       GameOver = pyqtSignal()
       
-      def __init__(self):
-         """
-            BRIEF  Construct the base classes
-         """
-         super().__init__()
+#       def __init__(self):
+#          """
+#             BRIEF  Construct the base classes
+#          """
+#          super().__init__()
          
-      @pyqtSlot(str)
-      def ApplyMove(self, uci):
-         """
-            BRIEF  Apply a move to the board
-         """
-         print(uci)
+#       @pyqtSlot(str)
+#       def ApplyMove(self, uci):
+#          """
+#             BRIEF  Apply a move to the board
+#          """
+#          print('Hello')
+#          print(uci)
          
-         move = chess.Move.from_uci(uci)
-         if move in self.legal_moves:
-            self.push(move)
+#          move = chess.Move.from_uci(uci)
+#          if move in self.legal_moves:
+#             self.push(move)
             
-            if not self.is_game_over():
-               self.ReadyForNextMove.emit(self.fen())
-            else:
-               print(self.fen())
-               self.GameOver.emit()
+#             if not self.is_game_over():
+#                self.ReadyForNextMove.emit(self.fen())
+#             else:
+#                print(self.fen())
+#                self.GameOver.emit()
                
-         sys.stdout.flush()
+#          sys.stdout.flush()
          
-   q_app = QApplication([])
-   thread = QThread()
-   board = ChessBoard()
-   player_b = AiPlayer(exe_path, .1, Player.BLACK, thread, board)
-   player_w = AiPlayer(exe_path, .1, Player.WHITE, thread, board)
+#    q_app = QApplication([])
+#    thread = QThread()
+#    board = ChessBoard()
+#    player_b = AiPlayer(exe_path, .1, Player.BLACK, thread, board)
+#    player_w = AiPlayer(exe_path, .1, Player.WHITE, thread, board)
    
-   player_options_b = PlayerOptions(player_b)
-   player_options_b.setGeometry(300, 300, 200, 100)
+#    player_options_b = PlayerOptions(player_b)
+#    player_options_b.setGeometry(300, 300, 200, 100)
    
-   player_options_w = PlayerOptions(player_w)
-   player_options_w.setGeometry(300, 600, 200, 100)
+#    player_options_w = PlayerOptions(player_w)
+#    player_options_w.setGeometry(300, 600, 200, 100)
    
-   board.GameOver.connect(q_app.exit)
-   q_app.aboutToQuit.connect(thread.quit)
-   thread.start()
+#    board.GameOver.connect(q_app.exit)
+#    q_app.aboutToQuit.connect(thread.quit)
+#    thread.start()
    
-   player_options_b.show()
-   player_options_w.show()
+#    player_options_b.show()
+#    player_options_w.show()
    
-   q_app.exec()
-   thread.wait()
+#    q_app.exec()
+#    thread.wait()
    
    
