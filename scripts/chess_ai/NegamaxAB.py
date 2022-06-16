@@ -12,7 +12,7 @@ class NegamaxAB:
   def minimaxRoot(self, depth, board, isMaximizing):
     possibleMoves = board.legal_moves
     print(list(possibleMoves))
-    bestMove = -9999
+    bestMove = -99999
     bestMoveFinal = None
     for x in possibleMoves:
       move = chess.Move.from_uci(str(x))
@@ -31,12 +31,12 @@ class NegamaxAB:
 
   def alphabeta(self, depth, board, alpha, beta, is_maximizing):
     if(depth == 0):
-      return -evaluation(board)
+      return -evaluation(board, is_maximizing)
     possibleMoves = board.legal_moves
     
     # Fail-soft alpha-beta pruning
     
-    bestMove = -9999
+    bestMove = -99999
     for x in possibleMoves:
       move = chess.Move.from_uci(str(x))
       board.push(move)
@@ -55,7 +55,7 @@ class NegamaxAB:
       print("No more possible moves...Game Over")
       sys.exit()
     bestMove = None
-    bestValue = -9999
+    bestValue = -99999
     n = 0
 
     for x in possible_moves:

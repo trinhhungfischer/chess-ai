@@ -11,9 +11,7 @@ class Negamax:
   def minimaxRoot(self, depth, board, isMaximizing):
     possibleMoves = board.legal_moves
 
-    bestMove = -9999
-    secondBest = -9999
-    thirdBest = -9999
+    bestMove = -99999
     bestMoveFinal = None
     for x in possibleMoves:
       move = chess.Move.from_uci(str(x))
@@ -23,20 +21,18 @@ class Negamax:
       if(value > bestMove):
         print("Best score: ", str(bestMove))
         print("Best move: ", str(bestMoveFinal))
-        print("Second best: ", str(secondBest))
-        secondBest = bestMove
         bestMove = value
         bestMoveFinal = move
     return bestMoveFinal
 
   def minimax(self, depth, board, is_maximizing):
     if(depth == 0):
-      return -evaluation(board)
+      return -evaluation(board, is_maximizing)
 
     possibleMoves = board.legal_moves
 
 
-    bestMove = -9999
+    bestMove = -99999
     for x in possibleMoves:
       move = chess.Move.from_uci(str(x))
       board.push(move)

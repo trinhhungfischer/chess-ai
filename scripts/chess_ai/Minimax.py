@@ -1,6 +1,6 @@
 import chess
-
 from scripts.chess_ai.Evaluation import evaluation
+from scripts.utils.Helper import Helper
 
 
 class Minimax:
@@ -8,55 +8,53 @@ class Minimax:
   def __init__(self) -> None:
     pass
 
-  def minimaxRoot(self, depth, board, isMaximizing):
+    
+  def minimaxRoot(self, depth, board: chess.Board, isMaximizing):
     possibleMoves = board.legal_moves
+    
+    bestMoveValue = -99999
 
-    bestMove = -9999
-    secondBest = -9999
-    thirdBest = -9999
     bestMoveFinal = None
+
+    if (len(list(possibleMoves)) == 0):
+      if (board.is_checkmate()):
+        print("You win")
+      elif (board.is_stalemate()):
+        print("Draw")
+      return
+
+
     for x in possibleMoves:
       move = chess.Move.from_uci(str(x))
       board.push(move)
-      value = max(bestMove, self.minimax(depth - 1, board, not isMaximizing))
+      value = max(bestMoveValue, self.minimax(depth - 1, board, not isMaximizing))
+      
       board.pop()
-      if(value > bestMove):
-        print("Best score: ", str(bestMove))
-        print("Best move: ", str(bestMoveFinal))
-        print("Second best: ", str(secondBest))
-        thirdBest = secondBest
-        secondBest = bestMove
-        bestMove = value
+      if(value > bestMoveValue):
+        bestMoveValue = value
         bestMoveFinal = move
+        print(value)
+
     return bestMoveFinal
 
   def minimax(self, depth, board, is_maximizing):
     if(depth == 0):
-      return -evaluation(board)
+      return -evaluation(board, is_maximizing)
     possibleMoves = board.legal_moves
     if(is_maximizing):
-      bestMove = -9999
+      bestMove = -99999
       for x in possibleMoves:
         move = chess.Move.from_uci(str(x))
         board.push(move)
-        bestMove = max(
-          bestMove,
-          self.minimax(
-            depth - 1,
-            board,
-            not is_maximizing))
+        bestMove = max(bestMove, self.minimax(depth - 1, board, not is_maximizing))
         board.pop()
       return bestMove
     else:
-      bestMove = 9999
+      bestMove = 99999
       for x in possibleMoves:
         move = chess.Move.from_uci(str(x))
         board.push(move)
-        bestMove = min(
-          bestMove,
-          self.minimax(
-            depth - 1,
-            board,
-            not is_maximizing))
+        bestMove = min(bestMove, self.minimax(depth - 1, board, not is_maximizing))
         board.pop()
       return bestMove
+    
