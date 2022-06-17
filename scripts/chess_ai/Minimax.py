@@ -38,9 +38,12 @@ class Minimax:
     return bestMoveFinal
 
   def minimax(self, depth, board, is_maximizing):
-    if(depth == 0):
-      return -evaluation(board, is_maximizing)
+
     possibleMoves = board.legal_moves
+
+    if (depth == 0) | (len(list(possibleMoves)) == 0):
+      return -evaluation(board, is_maximizing)
+
     if(is_maximizing):
       bestMove = -99999
       for x in possibleMoves:
