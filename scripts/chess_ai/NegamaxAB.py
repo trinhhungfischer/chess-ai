@@ -30,9 +30,11 @@ class NegamaxAB:
     return bestMoveFinal
 
   def alphabeta(self, depth, board, alpha, beta, is_maximizing):
-    if(depth == 0):
-      return -evaluation(board, is_maximizing)
+  
     possibleMoves = board.legal_moves
+    
+    if (depth == 0) | (len(list(possibleMoves)) == 0):
+      return -evaluation(board, is_maximizing)
     
     # Fail-soft alpha-beta pruning
     
@@ -44,6 +46,7 @@ class NegamaxAB:
       board.pop()
       
       alpha = max(alpha, bestMove)
+      
       if (beta <= alpha):
         return bestMove
     
@@ -51,6 +54,8 @@ class NegamaxAB:
     
   def calculateMove(board):
     possible_moves = board.legal_moves
+    
+    
     if(len(possible_moves) == 0):
       print("No more possible moves...Game Over")
       sys.exit()

@@ -5,14 +5,24 @@ A Chess AI bot for AI Introduction Project
 ## Analysis
 First, you must unzip chess.zip to get data.
 
-Second you should create a python virtual enviroment and activate it. If this package is not installed, please download Python and [this package](https://pypi.org/project/virtualenv/).
+Second you should create a python virtual enviroment and activate it. If this package is not installed, please download Python and [this package](https://pypi.org/project/virtualenv/) with Linux OS.
 ```
 virtualenv .venv
 source .venv/bin/activate
 ```
+or to create and activate a virtual environment on Windows, run command
+```
+python -m venv venv
+venv\Scripts\activate.bat
+```
 After enviroment activation, you must install requirement by this command.
 ```
 .venv/bin/pip install -r requirement.txt
+```
+
+or in Window
+```
+./.venv/script/activate
 ```
 Now you can run the scripts in the analysis folder with this virtual environment.
 
