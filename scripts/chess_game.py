@@ -2,7 +2,7 @@ import chess
 from scripts.chess_ai.ChessAI import ai_mapping
 
 ai_module = "Minimax"
-search_depth = 4
+search_depth = 3
 
 
 def print_board(board: chess.Board, isWhite : bool):
@@ -12,8 +12,8 @@ def print_board(board: chess.Board, isWhite : bool):
   #   print(board.transform(chess.flip_vertical))
 
 def game():
-  board = chess.Board('8/8/8/8/6Q1/1K6/8/k7 w - - 0 1')
-  # board = chess.Board()
+  # board = chess.Board('8/8/8/8/6Q1/1K6/8/k7 w - - 0 1')
+  board = chess.Board()
   n = 0
 
   side = input('Choose side: White (W), Black (B): ')
@@ -25,12 +25,10 @@ def game():
 
   while n < 100:
     if n%2 != isWhite:
-      print('Board turn is ', board.turn)
       move = input("Enter move: ")
       move = chess.Move.from_uci(str(move))
       board.push(move)
     else:
-      print('Board turn is ', board.turn)
       print("Computers Turn:")
       move = ai_mapping[ai_module](search_depth, board, True)
       print('Last move :', move)

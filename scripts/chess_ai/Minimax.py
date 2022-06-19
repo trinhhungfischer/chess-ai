@@ -28,12 +28,10 @@ class Minimax:
       move = chess.Move.from_uci(str(x))
       board.push(move)
       value = max(bestMoveValue, self.minimax(depth - 1, board, not isMaximizing))
-      
       board.pop()
       if(value > bestMoveValue):
         bestMoveValue = value
         bestMoveFinal = move
-        print(value)
 
     return bestMoveFinal
 
@@ -42,7 +40,7 @@ class Minimax:
     possibleMoves = board.legal_moves
 
     if (depth == 0) | (len(list(possibleMoves)) == 0):
-      return -evaluation(board, is_maximizing)
+      return evaluation(board, is_maximizing) * (1 if is_maximizing else -1)
 
     if(is_maximizing):
       bestMove = -99999

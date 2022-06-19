@@ -46,6 +46,7 @@ class NegamaxAB:
       board.pop()
       
       alpha = max(alpha, bestMove)
+      
       if (beta <= alpha):
         return bestMove
     
