@@ -20,17 +20,22 @@ class Minimax:
       if (board.is_checkmate()):
         print("You win")
       elif (board.is_stalemate()):
-        print("Draw")
+        print("Stalemate so draw, dumb***")
       return
 
+    if (board.is_insufficient_material()):
+      print("Draw because insufficient material")      
+      return
 
     for x in possibleMoves:
       move = chess.Move.from_uci(str(x))
       board.push(move)
       
       print('-----------------------------------------------------')
-      print('Nuoc di dau tien ', move)
       value = max(bestMoveValue, self.minimax(depth - 1, board, not isMaximizing, isWhitePlayer))
+
+      print('Nuoc di dau tien ', move, 'co gia tri la', value)
+      print('-----------------------------------------------------')
 
       board.pop()
       if(value > bestMoveValue):
