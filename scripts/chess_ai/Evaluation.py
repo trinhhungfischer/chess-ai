@@ -123,13 +123,17 @@ def getPieceValue(piece, position):
   return value
 
 
-def evaluation(board: chess.Board, isMaximizing):
+def evaluation(board: chess.Board, isMaximizing: bool, isWhitePlayer: bool):
   i = 0
   evaluation = 0
   x = True
 
+  # print('Luot di cua ', ('trang' if board.turn else 'den'))
+
+  # print('Board is checkmate ', board.is_checkmate())
+  
   if board.is_checkmate():
-    return 99999 * (1 if isMaximizing else -1)
+    return 99999 * (-1 if board.turn == isWhitePlayer else 1)
 
 
   if board.is_stalemate():
@@ -149,5 +153,4 @@ def evaluation(board: chess.Board, isMaximizing):
     
     i += 1
 
-
-  return evaluation
+  return evaluation * (1 if isWhitePlayer else -1)
