@@ -9,7 +9,7 @@ class Minimax:
     pass
 
     
-  def minimaxRoot(self, depth, board: chess.Board, isMaximizing):
+  def minimaxRoot(self, depth, board: chess.Board, isMaximizing: bool, isWhitePlayer: bool):
     possibleMoves = board.legal_moves
     
     bestMoveValue = -99999
@@ -20,14 +20,23 @@ class Minimax:
       if (board.is_checkmate()):
         print("You win")
       elif (board.is_stalemate()):
-        print("Draw")
+        print("Stalemate so draw, dumb***")
       return
 
+    if (board.is_insufficient_material()):
+      print("Draw because insufficient material")      
+      return
 
     for x in possibleMoves:
       move = chess.Move.from_uci(str(x))
       board.push(move)
-      value = max(bestMoveValue, self.minimax(depth - 1, board, not isMaximizing))
+      
+      print('-----------------------------------------------------')
+      value = max(bestMoveValue, self.minimax(depth - 1, board, not isMaximizing, isWhitePlayer))
+
+      print('Nuoc di dau tien ', move, 'co gia tri la', value)
+      print('-----------------------------------------------------')
+
       board.pop()
       if(value > bestMoveValue):
         bestMoveValue = value
@@ -35,27 +44,31 @@ class Minimax:
 
     return bestMoveFinal
 
-  def minimax(self, depth, board, is_maximizing):
+  def minimax(self, depth, board, isMaximizing: bool, isWhitePlayer: bool):
 
     possibleMoves = board.legal_moves
 
     if (depth == 0) | (len(list(possibleMoves)) == 0):
-      return evaluation(board, is_maximizing) * (1 if is_maximizing else -1)
+      return evaluation(board, isMaximizing, isWhitePlayer)
 
-    if(is_maximizing):
+    if(isMaximizing):
       bestMove = -99999
       for x in possibleMoves:
         move = chess.Move.from_uci(str(x))
         board.push(move)
-        bestMove = max(bestMove, self.minimax(depth - 1, board, not is_maximizing))
+        bestMove = max(bestMove, self.minimax(depth - 1, board, not isMaximizing, isWhitePlayer))
+        print(x, '  ', depth, '  ', bestMove)
         board.pop()
+      
       return bestMove
     else:
       bestMove = 99999
       for x in possibleMoves:
         move = chess.Move.from_uci(str(x))
         board.push(move)
-        bestMove = min(bestMove, self.minimax(depth - 1, board, not is_maximizing))
+        bestMove = min(bestMove, self.minimax(depth - 1, board, not isMaximizing, isWhitePlayer))
+        print(x, '  ', depth, '  ', bestMove)
         board.pop()
+    
       return bestMove
     

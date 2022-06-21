@@ -31,7 +31,7 @@ class Alphabeta:
     possibleMoves = board.legal_moves
 
     if (depth == 0) | (len(list(possibleMoves)) == 0):
-      return -evaluation(board)
+      return evaluation(board, is_maximizing)
     
     # Fail-soft alpha-beta pruning
     

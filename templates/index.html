@@ -1,0 +1,24 @@
+<html>
+
+<head>
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+
+  <style>
+    input {
+      font-size: 20px;
+    }
+
+    button {
+      font-size: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <img width=510 height=510 src="/board.svg"></img></br></br>
+  <form action="/game/" method="post"><button name="New Game" type="submit">New Game</button></form>
+  <form action="/undo/" method="post"><button name="Undo" type="submit">Undo Last Move</button></form>
+  <form action="/move/"><input type="submit" value="Make Human Move:"><input name="move" type="text"></input></form>
+  <form action="/dev/" method="post"><button name="Comp Move" type="submit">Make Ai Move</button></form>
+  <form action="/engine/" method="post"><button name="Stockfish Move" type="submit">Make Stockfish Move</button></form>
+</body>

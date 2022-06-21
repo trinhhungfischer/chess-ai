@@ -1,4 +1,4 @@
-from scripts.chess_game import game
+from scripts.cli import cli 
 
 if __name__ == "__main__":
-  game()
+  cli()
