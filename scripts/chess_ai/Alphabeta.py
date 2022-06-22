@@ -8,7 +8,7 @@ class Alphabeta:
   def __init__(self) -> None:
     pass
 
-  def minimaxRoot(self, depth, board, isMaximizing):
+  def minimaxRoot(self, depth, board, isMaximizing, isWhitePlayer):
     possibleMoves = board.legal_moves
 
     bestMove = -99999
@@ -19,19 +19,19 @@ class Alphabeta:
 
       value = max(
         bestMove, self.alphabeta(
-          depth - 1, board, -10000, 10000, not isMaximizing))
+          depth - 1, board, -999999, 999999, not isMaximizing, isWhitePlayer))
       board.pop()
       if(value > bestMove):
         bestMove = value
         bestMoveFinal = move
     return bestMoveFinal
 
-  def alphabeta(self, depth, board, alpha, beta, is_maximizing):
+  def alphabeta(self, depth, board, alpha, beta, isMaximizing, isWhitePlayer):
 
     possibleMoves = board.legal_moves
 
     if (depth == 0) | (len(list(possibleMoves)) == 0):
-      return evaluation(board, is_maximizing)
+      return evaluation(board, isMaximizing, isWhitePlayer)
     
     # Fail-soft alpha-beta pruning
     
@@ -39,31 +39,11 @@ class Alphabeta:
     for x in possibleMoves:
       move = chess.Move.from_uci(str(x))
       board.push(move)
-      bestMove = max(bestMove, self.alphabeta(depth - 1, board, -beta, -alpha, not is_maximizing)) 
+      bestMove = max(bestMove, -self.alphabeta(depth - 1, board, -beta, -alpha, not isMaximizing, isWhitePlayer)) 
       board.pop()
       
       alpha = max(alpha, bestMove)
       if (beta <= alpha):
         return bestMove
     
-    return bestMove
-    
-  def calculateMove(board):
-    possible_moves = board.legal_moves
-    if(len(possible_moves) == 0):
-      print("No more possible moves...Game Over")
-      sys.exit()
-    bestMove = None
-    bestValue = -99999
-    n = 0
-
-    for x in possible_moves:
-      move = chess.Move.from_uci(str(x))
-      board.push(move)
-      boardValue = -evaluation(board)
-      board.pop()
-      if(boardValue > bestValue):
-        bestValue = boardValue
-        bestMove = move
-
     return bestMove

@@ -8,7 +8,7 @@ app = Flask(__name__, template_folder='templates')
 chessGame = ChessGame('Minimax', 3)
 
 @app.route('/')
-def main():
+def index():
   return render_template('index.html')
 
 # Display Board
@@ -19,19 +19,41 @@ def board():
 # New Game
 @app.route("/game/", methods=['POST'])
 def newGame():
-  chessGame.setBoard()
-  return main()
+  chessGame.resetBoard()
+  return index()
 
 # Human Move
-@app.route("/move/")
+@app.route("/move/", methods=['GET', 'POST'])
 def move():
   try:
     move = request.args.get('move', default="")
-    board.push_uci(move)
+    gameState = chessGame.humanMove(move)
+    print(gameState)
+    # if gameState == 3 & gameState == 4:
+    if gameState == 3:
+      render_template('index.html')
+    return index()
   except:
     traceback.print_exc()
 
-  return main()
+# Bot Move
+@app.route("/dev/", methods=['GET', 'POST'])
+def dev():
+  try:
+    gameState = chessGame.botMove()
+    # if gameState == 3 & gameState == 4:
+    if gameState == 3:
+      render_template('index.html')  
+    return index()
+  except:
+    traceback.print_exc()
+    
+# Undo move
+@app.route("/undo/", methods=['POST'])
+def undo():
+  chessGame.undoMove()
+  return index()
+
 
 if __name__ == 'main':
     app.run(debug=False) 
