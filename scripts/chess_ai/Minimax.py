@@ -16,16 +16,6 @@ class Minimax:
 
     bestMoveFinal = None
 
-    if (len(list(possibleMoves)) == 0):
-      if (board.is_checkmate()):
-        print("You win")
-      elif (board.is_stalemate()):
-        print("Stalemate so draw, dumb***")
-      return
-
-    if (board.is_insufficient_material()):
-      print("Draw because insufficient material")      
-      return
 
     for x in possibleMoves:
       move = chess.Move.from_uci(str(x))
