@@ -6,4 +6,5 @@ numpy==1.22.3
 pandas==1.4.1
 pycparser==2.21
 pyparsing==3.0.7
+Flask==2.1.2
 seaborn==0.11.2
