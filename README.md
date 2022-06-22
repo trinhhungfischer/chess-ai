@@ -43,3 +43,14 @@ or in linux
 ```
 python3 main.py
 ```
+
+## About Chess App
+The chess app is written by Flask and could played in localhost. You can use it by run [app.py](./app.py) python file by terminal by command in window
+```
+python app.py
+```
+or in linux 
+```
+python3 app.py
+```
+After that, you can open browser with [127.0.0.1:5000](127.0.0.1:5000) to start chess app
