@@ -9,9 +9,8 @@ class NegamaxAB:
   def __init__(self) -> None:
     pass
 
-  def searchRoot(self, depth, board, isMaximizing: bool, isWhitePlayer: bool):
+  def searchRoot(self, depth, board, isMaximizing: bool, isWhitePlayer: bool, debug = False):
     possibleMoves = board.legal_moves
-    print(list(possibleMoves))
     bestMove = -99999
     bestMoveFinal = None
     for x in possibleMoves:
@@ -21,15 +20,14 @@ class NegamaxAB:
       value = max(
         bestMove, -self.negamaxAB(
           depth - 1, board, -10000, 10000, not isMaximizing, isWhitePlayer))
-    
-      print(value);
+        
       board.pop()
       if(value > bestMove):
         bestMove = value
         bestMoveFinal = move
     return bestMoveFinal
 
-  def negamaxAB(self, depth, board, alpha, beta, isMaximizing: bool, isWhitePlayer: bool):
+  def negamaxAB(self, depth, board, alpha, beta, isMaximizing: bool, isWhitePlayer: bool, debug = False):
   
     possibleMoves = board.legal_moves
     

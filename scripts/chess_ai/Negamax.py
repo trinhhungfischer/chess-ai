@@ -17,7 +17,6 @@ class Negamax:
       move = chess.Move.from_uci(str(x))
       board.push(move)
       value = max(bestMove, self.negamax(depth - 1, board, not isMaximizing, isWhitePlayer))
-      print(value)
       board.pop()
       if(value > bestMove):
         bestMove = value

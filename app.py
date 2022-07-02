@@ -31,8 +31,7 @@ def move():
   try:
     move = request.args.get('move', default="")
     gameState = chessGame.humanMove(move)
-    print(gameState)
-    # if gameState == 3 & gameState == 4:
+
     if gameState == 3:
       render_template('index.html')
     return index()
