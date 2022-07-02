@@ -4,7 +4,6 @@ from scripts.chess_game import ChessGame
 
 app = Flask(__name__, template_folder='templates')
 
-# game_board = chess.Board()
 chessGame = ChessGame('Minimax', 3)
 
 @app.route('/')
@@ -17,10 +16,14 @@ def board():
   return Response(chessGame.getBoardSVG(), mimetype='image/svg+xml')
 
 # New Game
-@app.route("/game/", methods=['POST'])
+@app.route("/game/", methods=['GET', 'POST'])
 def newGame():
   chessGame.resetBoard()
+  
+  color = request.args.get('color', default="1")
+  chessGame.setIsWhitePlayer(color == "1")
   return index()
+
 
 # Human Move
 @app.route("/move/", methods=['GET', 'POST'])

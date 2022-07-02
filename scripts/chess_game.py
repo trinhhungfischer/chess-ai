@@ -22,6 +22,12 @@ class ChessGame:
       self.__board = chess.Board()
       return  
     self.__board = chess.Board(fen)
+    
+  def getIsWhitePlayer(self):
+    return self.__isPlayerWhite
+  
+  def setIsWhitePlayer(self, isWhitePlayer):
+    self.__isPlayerWhite = isWhitePlayer
   
   def getAiModule(self):
     return self.__aiModule
@@ -41,7 +47,7 @@ class ChessGame:
     self.__board = chess.Board()
     
   def getBoardSVG(self):
-    return chess.svg.board(board = self.__board, size=700)
+    return chess.svg.board(board = self.__board, size=700, flipped=(not self.__isPlayerWhite))
   
   def printBoard(self):
     if self.__isPlayerWhite:

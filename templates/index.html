@@ -48,8 +48,15 @@
     <p>     Now searching dephth: </p>
     <p id="depth_text">3</p>    
   </div> -->
+  <form action="/game" >
+    <label for="game" style="font-size:20">New game with color is:</label>
+    <select name="color" id="color">
+      <option value="1">White</option>
+      <option value="0">Black</option>
+      </select>
+    <input type="submit" value="Submit" id = "color_change">
+  </form>
 
-  <form action="/game/" method="post"><button name="New Game" type="submit">New Game</button></form>
   <form action="/undo/" method="post"><button name="Undo" type="submit">Undo Last Move</button></form>
   <form action="/move/"><input type="submit" value="Make Human Move:"><input name="move" type="text"></input></form>
   <form action="/dev/" method="post"><button name="Comp Move" type="submit">Make Ai Move</button></form>
