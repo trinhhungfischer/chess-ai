@@ -4,6 +4,15 @@
   <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
 
   <style>
+    text {
+      font-size: 20px;
+
+    }
+
+    select {
+      font-size: 20px;
+
+    }
     input {
       font-size: 20px;
     }
@@ -13,11 +22,57 @@
     }
   </style>
 </head>
+<!-- <script>
+  let aimodule = "Minimax";
+  let depth = 3;
 
+  let aiBtn = document.getElementById("ai_module_change");
+  aiBtn.addEventListener("click", function() {
+    aimodule = document.getElementById("module").value;
+  });
+
+  let depthBtn = document.getElementById("depth_change");
+  aiBtn.addEventListener("click", function() {
+    depth = document.getElementById("depth").value;
+  });
+
+  document.getElementById("aimodule_text") = aimodule;
+  document.getElementById("depth_text") = depth;
+</script> -->
 <body>
   <img width=510 height=510 src="/board.svg"></img></br></br>
+  
+  <!-- <div>
+    <p>Now AI algorithms is: </p>
+    <p id="aimodule_text">Minimax</p>
+    <p>     Now searching dephth: </p>
+    <p id="depth_text">3</p>    
+  </div> -->
+
   <form action="/game/" method="post"><button name="New Game" type="submit">New Game</button></form>
   <form action="/undo/" method="post"><button name="Undo" type="submit">Undo Last Move</button></form>
   <form action="/move/"><input type="submit" value="Make Human Move:"><input name="move" type="text"></input></form>
   <form action="/dev/" method="post"><button name="Comp Move" type="submit">Make Ai Move</button></form>
+  <form action="/aimodule" >
+    <label for="aimodule" style="font-size:20">Choose AI module:</label>
+    <select name="aimodule" id="aimodule">
+      <option value="Minimax">Minimax</option>
+      <option value="Alphabeta">Minimax with Alpha Beta Pruning</option>
+      <option value="Negamax">Negamax</option>
+      <option value="NegamaxAB">Negamax Alpha Beta Pruning</option>
+    </select>
+    <input type="submit" value="Submit" id = "ai_module_change">
+  </form>
+
+  <form action="/depth" >
+    <label for="depth" style="font-size:20">Choose AI Searching Depth:</label>
+    <select name="aimodule" id="aimodule">
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+    </select>
+    <input type="submit" value="Submit" id = "depth_change">
+  </form>
 </body>
+</html>

@@ -5,9 +5,9 @@ from scripts.chess_ai.NegamaxAB import NegamaxAB
 
 
 ai_mapping = {
-  "Alphabeta": Alphabeta().minimaxRoot,
-  "Minimax": Minimax().minimaxRoot,
-  "Negamax": Negamax().minimaxRoot,
-  "NegamaxAB": NegamaxAB().minimaxRoot,
+  "Alphabeta": Alphabeta().searchRoot,
+  "Minimax": Minimax().searchRoot,
+  "Negamax": Negamax().searchRoot,
+  "NegamaxAB": NegamaxAB().searchRoot,
   
 }

@@ -8,7 +8,7 @@ class Negamax:
   def __init__(self) -> None:
     pass
 
-  def minimaxRoot(self, depth, board, isMaximizing: bool, isWhitePlayer: bool):
+  def searchRoot(self, depth, board, isMaximizing: bool, isWhitePlayer: bool):
     possibleMoves = board.legal_moves
 
     bestMove = -99999
@@ -16,11 +16,8 @@ class Negamax:
     for x in possibleMoves:
       move = chess.Move.from_uci(str(x))
       board.push(move)
-      print('-----------------------------------------------------')
-      value = max(bestMove, self.minimax(depth - 1, board, not isMaximizing, isWhitePlayer))
-      
-      print('Nuoc di dau tien ', move, 'co gia tri la', value)
-      print('-----------------------------------------------------')
+      value = max(bestMove, self.negamax(depth - 1, board, not isMaximizing, isWhitePlayer))
+      print(value)
       board.pop()
       if(value > bestMove):
         bestMove = value
@@ -28,7 +25,7 @@ class Negamax:
       
     return bestMoveFinal
 
-  def minimax(self, depth, board, isMaximizing: bool, isWhitePlayer: bool):
+  def negamax(self, depth, board, isMaximizing: bool, isWhitePlayer: bool):
 
     possibleMoves = board.legal_moves
 
@@ -39,7 +36,6 @@ class Negamax:
     for x in possibleMoves:
       move = chess.Move.from_uci(str(x))
       board.push(move)
-      bestMove = max(bestMove, -self.minimax(depth - 1, board, not isMaximizing, isWhitePlayer))
-      print(x, '  ', depth, '  ', bestMove)
+      bestMove = max(bestMove, -self.negamax(depth - 1, board, not isMaximizing, isWhitePlayer))
       board.pop()
     return bestMove

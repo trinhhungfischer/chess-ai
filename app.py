@@ -54,6 +54,19 @@ def undo():
   chessGame.undoMove()
   return index()
 
+# Change aimodule
+@app.route("/aimodule/", methods=['GET', 'POST'])
+def aimodule():
+  aimodule = request.args.get('aimodule', default="Minimax")
+  chessGame.setAiModule(aimodule)
+  return index()
+
+# Change searching depth
+@app.route("/depth/", methods=['GET', 'POST'])
+def aidepth():
+  depth = request.args.get('depth', default="3")
+  chessGame.setDepthSearch(int(depth))
+  return index()
 
 if __name__ == '__main__':
     app.run(debug=False) 

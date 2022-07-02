@@ -9,7 +9,7 @@ class Minimax:
     pass
 
     
-  def minimaxRoot(self, depth, board: chess.Board, isMaximizing: bool, isWhitePlayer: bool):
+  def searchRoot(self, depth, board: chess.Board, isMaximizing: bool, isWhitePlayer: bool):
     possibleMoves = board.legal_moves
     
     bestMoveValue = -99999
@@ -20,12 +20,7 @@ class Minimax:
     for x in possibleMoves:
       move = chess.Move.from_uci(str(x))
       board.push(move)
-      
-      print('-----------------------------------------------------')
       value = max(bestMoveValue, self.minimax(depth - 1, board, not isMaximizing, isWhitePlayer))
-
-      print('Nuoc di dau tien ', move, 'co gia tri la', value)
-      print('-----------------------------------------------------')
 
       board.pop()
       if(value > bestMoveValue):
@@ -46,8 +41,7 @@ class Minimax:
       for x in possibleMoves:
         move = chess.Move.from_uci(str(x))
         board.push(move)
-        bestMove = max(bestMove, self.minimax(depth - 1, board, not isMaximizing, isWhitePlayer))
-        print(x, '  ', depth, '  ', bestMove)
+        bestMove = max(bestMove, self.minimax(depth - 1, board, not isMaximizing, isWhitePlayer))       
         board.pop()
       
       return bestMove
@@ -57,7 +51,6 @@ class Minimax:
         move = chess.Move.from_uci(str(x))
         board.push(move)
         bestMove = min(bestMove, self.minimax(depth - 1, board, not isMaximizing, isWhitePlayer))
-        print(x, '  ', depth, '  ', bestMove)
         board.pop()
     
       return bestMove
