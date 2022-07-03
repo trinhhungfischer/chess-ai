@@ -9,9 +9,8 @@ class NegamaxAB:
   def __init__(self) -> None:
     pass
 
-  def minimaxRoot(self, depth, board, isMaximizing):
+  def searchRoot(self, depth, board, isMaximizing: bool, isWhitePlayer: bool, debug = False):
     possibleMoves = board.legal_moves
-    print(list(possibleMoves))
     bestMove = -99999
     bestMoveFinal = None
     for x in possibleMoves:
@@ -19,22 +18,21 @@ class NegamaxAB:
       board.push(move)
 
       value = max(
-        bestMove, self.alphabeta(
-          depth - 1, board, -10000, 10000, not isMaximizing))
+        bestMove, -self.negamaxAB(
+          depth - 1, board, -10000, 10000, not isMaximizing, isWhitePlayer))
+        
       board.pop()
       if(value > bestMove):
-        print("Best score: ", str(bestMove))
-        print("Best move: ", str(bestMoveFinal))
         bestMove = value
         bestMoveFinal = move
     return bestMoveFinal
 
-  def alphabeta(self, depth, board, alpha, beta, is_maximizing):
+  def negamaxAB(self, depth, board, alpha, beta, isMaximizing: bool, isWhitePlayer: bool, debug = False):
   
     possibleMoves = board.legal_moves
     
     if (depth == 0) | (len(list(possibleMoves)) == 0):
-      return -evaluation(board, is_maximizing)
+      return -evaluation(board, isMaximizing, isWhitePlayer)
     
     # Fail-soft alpha-beta pruning
     
@@ -42,7 +40,7 @@ class NegamaxAB:
     for x in possibleMoves:
       move = chess.Move.from_uci(str(x))
       board.push(move)
-      bestMove = max(bestMove, self.alphabeta(depth - 1, board, -beta, -alpha, not is_maximizing)) 
+      bestMove = max(bestMove, -self.negamaxAB(depth - 1, board, -beta, -alpha, not isMaximizing, not isWhitePlayer)) 
       board.pop()
       
       alpha = max(alpha, bestMove)
@@ -50,26 +48,4 @@ class NegamaxAB:
       if (beta <= alpha):
         return bestMove
     
-    return bestMove
-    
-  def calculateMove(board):
-    possible_moves = board.legal_moves
-    
-    
-    if(len(possible_moves) == 0):
-      print("No more possible moves...Game Over")
-      sys.exit()
-    bestMove = None
-    bestValue = -99999
-    n = 0
-
-    for x in possible_moves:
-      move = chess.Move.from_uci(str(x))
-      board.push(move)
-      boardValue = -evaluation(board)
-      board.pop()
-      if(boardValue > bestValue):
-        bestValue = boardValue
-        bestMove = move
-
     return bestMove

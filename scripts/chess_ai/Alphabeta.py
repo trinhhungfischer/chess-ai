@@ -8,7 +8,7 @@ class Alphabeta:
   def __init__(self) -> None:
     pass
 
-  def minimaxRoot(self, depth, board, isMaximizing, isWhitePlayer):
+  def searchRoot(self, depth, board, isMaximizing, isWhitePlayer):
     possibleMoves = board.legal_moves
 
     bestMove = -99999

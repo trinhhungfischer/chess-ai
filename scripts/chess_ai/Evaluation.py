@@ -127,10 +127,6 @@ def evaluation(board: chess.Board, isMaximizing: bool, isWhitePlayer: bool):
   i = 0
   evaluation = 0
   x = True
-
-  # print('Luot di cua ', ('trang' if board.turn else 'den'))
-
-  # print('Board is checkmate ', board.is_checkmate())
   
   if board.is_checkmate():
     return 99999 * (-1 if board.turn == isWhitePlayer else 1)
